@@ -47,10 +47,13 @@ class ListingController extends Controller
     }
 
     public function edit(Listing $listing){
+        $this->verifiedListingBelongsToUser($listing);
+        
         return view('listing.edit',compact('listing'));
     }
 
     public function update(Request $request, Listing $listing){
+        $this->verifiedListingBelongsToUser($listing);
 
         $data = $request->validate([
             'title'         => 'required',
@@ -72,6 +75,8 @@ class ListingController extends Controller
     }
 
     public function destroy(Listing $listing){
+        $this->verifiedListingBelongsToUser($listing);
+
         $listing->delete();
         return to_route('listing.index')->with('message','Listing deleted successfully !');
     }
@@ -80,6 +85,13 @@ class ListingController extends Controller
         return view('listing.manage',[
             'listings' => auth()->user()->listings()->get()
         ]);
+    }
+
+    private function verifiedListingBelongsToUser(Listing $listing){
+        if(auth()->user()->id !== $listing->user_id){
+            abort(404);
+            exit;
+        }
     }
 
 }
