@@ -1,6 +1,6 @@
 <x-layout>
     @include('partials._search')
-    
+
     <div class="inline-flex justify-between items-center w-full text-black px-4 mb-4">
         <a href="{{ route('listing.index') }}"><i class="fa-solid fa-arrow-left"></i> Back</a>
         <x-card class="py-2">

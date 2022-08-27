@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
 
-        \App\Models\Listing::factory(8)->create();
+        \App\Models\Listing::factory(8)->create([
+            'user_id' => \App\Models\User::inRandomOrder()->first()->id
+        ]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

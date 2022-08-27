@@ -39,6 +39,8 @@ class ListingController extends Controller
             $data['logo'] = $request->logo->store('logos','public');
         }
 
+        $data['user_id']  = auth()->user()->id;
+
         Listing::create($data);
 
         return to_route('listing.index')->with('message','Listing created successfully !');
