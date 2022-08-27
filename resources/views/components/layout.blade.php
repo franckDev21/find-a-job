@@ -27,7 +27,7 @@
                     <span class="uppercase font-bold ">Welcome {{ auth()->user()->name }}</span>
                 </li>
                 <li>
-                    <a href="login.html" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
+                    <a href="{{ route('manage') }}" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
                         Manager listing
                     </a>
                 </li>
