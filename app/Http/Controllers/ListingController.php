@@ -71,6 +71,6 @@ class ListingController extends Controller
 
     public function destroy(Listing $listing){
         $listing->delete();
-        return to_route('listing.index');
+        return to_route('listing.index')->with('message','Listing deleted successfully !');
     }
 }
