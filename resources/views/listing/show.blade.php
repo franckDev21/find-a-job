@@ -1,8 +1,17 @@
 <x-layout>
     @include('partials._search')
-    <a href="index.html" class="inline-block text-black ml-4 mb-4">
-        <i class="fa-solid fa-arrow-left"></i> Back
-    </a>
+    
+    <div class="inline-flex justify-between items-center w-full text-black px-4 mb-4">
+        <a href="{{ route('listing.index') }}"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        <x-card class="py-2">
+            <a href="{{ route('listing.edit',$listing->id) }}" class="px-2 py-1 bg-gray-100 rounded-md"><i class="fa-solid fa-pencil text-sm mr-1"></i> Edit</a>
+            <form action="{{ route('listing.delete',$listing->id) }}" class="inline" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-laravel px-2 py-1 bg-red-100 rounded-md"><i class="fa-solid fa-trash text-sm mr-1"></i> Delete</button>
+            </form>
+        </x-card>
+    </div>
 
     <div class="mx-4">
         <x-card>

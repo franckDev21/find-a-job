@@ -43,4 +43,34 @@ class ListingController extends Controller
 
         return to_route('listing.index')->with('message','Listing created successfully !');
     }
+
+    public function edit(Listing $listing){
+        return view('listing.edit',compact('listing'));
+    }
+
+    public function update(Request $request, Listing $listing){
+
+        $data = $request->validate([
+            'title'         => 'required',
+            'company'       => ['required'],
+            'location'      => 'required',
+            'website'       => 'required',
+            'email'         => ['required','email'],
+            'tags'          => 'required',
+            'description'   => 'required',
+        ]);
+
+        if($request->hasFile('logo')){
+            $data['logo'] = $request->logo->store('logos','public');
+        }
+
+        $listing->update($data);
+
+        return back()->with('message','Listing updated successfully !');
+    }
+
+    public function destroy(Listing $listing){
+        $listing->delete();
+        return to_route('listing.index');
+    }
 }
